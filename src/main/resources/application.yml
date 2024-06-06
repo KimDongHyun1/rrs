@@ -6,7 +6,6 @@ spring:
       settings:
         web-allow-others: true
 
-
   datasource:
     driver-class-name: org.h2.Driver
     username: sa
@@ -15,3 +14,7 @@ spring:
     hibernate:
       ddl-auto: create
     show-sql: true
+
+  mvc:
+    view:
+      suffix: .html
