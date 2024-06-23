@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 public class MainController {
 
-    @GetMapping("/main")
+    @GetMapping("/")
     public String main(Model model) {
         return "main";
     }
