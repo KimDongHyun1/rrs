@@ -25,3 +25,4 @@ stock:
   appsecret: PTcsc7WswS5RY6xuEAhovPN5D3HWT9lsE/v9E0CyZUc4IQD5FsmbeELqfajDDqpB77VlhLJ9G4P1Wro4/+ENR5tXC58Vb6pNIIEr9n1ulRHpnRPyBvHTFG6Sim+qr7EuOTdA77DzWXU7DSogBf4q0dJ/rhYY0CJE++ZCHXY3mE1v0wuKL5I=
 
 
+#spring.thymeleaf.cache=false
