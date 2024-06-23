@@ -15,14 +15,24 @@ spring:
       ddl-auto: create
     show-sql: true
 
-  mvc:
-    view:
-      suffix: .html
+  devtools:
+    livereload:
+      enabled: true
+
+#  mvc:
+#    view:
+#      suffix: .html
+#    static-path-pattern: /static/** # spring mvc 정적경로 변경
+
+  thymeleaf:
+    enabled: true
+    prefix: classpath:templates/
+    check-template-location: true
+    suffix: .html
+    mode: HTML
+    cache: false # default true, 개발 시에는 false로 두는 것이 좋음
 
 stock:
   grant_type: client_credentials
   appkey: PShKbH9bDvVmzsvxjXEtf4PPFNyvlN8ZHDAV
   appsecret: PTcsc7WswS5RY6xuEAhovPN5D3HWT9lsE/v9E0CyZUc4IQD5FsmbeELqfajDDqpB77VlhLJ9G4P1Wro4/+ENR5tXC58Vb6pNIIEr9n1ulRHpnRPyBvHTFG6Sim+qr7EuOTdA77DzWXU7DSogBf4q0dJ/rhYY0CJE++ZCHXY3mE1v0wuKL5I=
-
-
-#spring.thymeleaf.cache=false

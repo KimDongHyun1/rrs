@@ -6,6 +6,9 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 @Setter
 @Getter
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
@@ -21,11 +24,48 @@ public class UsStockInfoResVO {
     @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
     private static class Output {
-        private String last; //현재가
-        private String tomv; //시가총액
-        private String h52p; //52주 최고가
-        private String l52p; //52주 최저가
-        private String perx; //per
+        private BigDecimal last; //현재가
+        private BigDecimal tomv; //시가총액
+        private BigDecimal h52p; //52주 최고가
+        private BigDecimal l52p; //52주 최저가
+        private BigDecimal perx; //per
+        private String rsym; //name
+
+        public void setLast(BigDecimal last) {
+            this.last = setScaleToTwo(last);
+        }
+
+        public void setTomv(BigDecimal tomv) {
+            this.tomv = setScaleToTwo(tomv);
+        }
+
+        public void setH52p(BigDecimal h52p) {
+            this.h52p = setScaleToTwo(h52p);
+        }
+
+        public void setL52p(BigDecimal l52p) {
+            this.l52p = setScaleToTwo(l52p);
+        }
+
+        public void setPerx(BigDecimal perx) {
+            this.perx = setScaleToTwo(perx);
+        }
+
+        public void setRsym(String rsym) {
+            if (rsym != null && rsym.length() > 4) {
+                this.rsym = rsym.substring(4);
+            } else {
+                this.rsym = rsym;
+            }
+        }
+
+        private BigDecimal setScaleToTwo(BigDecimal value) {
+            if (value != null) {
+                return value.setScale(2, RoundingMode.HALF_UP);
+            } else {
+                return null;
+            }
+        }
     }
 
 }

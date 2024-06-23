@@ -10,6 +10,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +25,9 @@ public class UsStockService {
     private String appSecret;
 
     private final TokenService tokenService;
+
+    //TODO : DEL
+    private String authToken;
 
     /**
      * 미국 주식 차트 조회
@@ -39,7 +45,7 @@ public class UsStockService {
                 .append("&MODP=").append(reqVO.getModp())
                 .toString();
 
-        String authToken = tokenService.createToken();
+        authToken = (authToken == null) ? tokenService.createToken() : authToken;
         UsStockChartResVO resVO;
 
         try {
@@ -87,7 +93,7 @@ public class UsStockService {
                 .append("&SYMB=").append(reqVO.getSymb())
                 .toString();
 
-        String authToken = tokenService.createToken();
+        authToken = (authToken == null) ? tokenService.createToken() : authToken;
         UsStockInfoResVO resVO;
 
         try {
@@ -122,6 +128,55 @@ public class UsStockService {
 
         return resVO;
     }
+
+    public List<UsStockInfoResVO> infoList(UsStockInfoReqVO reqVO) throws Exception {
+        List<UsStockInfoResVO> resultList = new ArrayList<>();
+        List<UsStockInfoReqVO> searchList = new ArrayList<>();
+
+        //테슬라
+        UsStockInfoReqVO tlsaVO = UsStockInfoReqVO.builder()
+                .auth("")
+                .excd("NAS")
+                .symb("TSLA")
+                .build();
+
+        //룰루레몬
+        UsStockInfoReqVO LuluVO = UsStockInfoReqVO.builder()
+                .auth("")
+                .excd("NAS")
+                .symb("LULU")
+                .build();
+
+        //SPY
+        UsStockInfoReqVO SpyVO = UsStockInfoReqVO.builder()
+                .auth("")
+                .excd("AMS")
+                .symb("SPY")
+                .build();
+
+        //QQQ
+        UsStockInfoReqVO QqqVO = UsStockInfoReqVO.builder()
+                .auth("")
+                .excd("NAS")
+                .symb("QQQ")
+                .build();
+
+        //SCHD
+        UsStockInfoReqVO SchdVO = UsStockInfoReqVO.builder()
+                .auth("")
+                .excd("AMS")
+                .symb("SCHD")
+                .build();
+
+        searchList.addAll(Arrays.asList(tlsaVO, LuluVO, SpyVO, QqqVO, SchdVO));
+
+        for (UsStockInfoReqVO infoSearchVO : searchList) {
+            UsStockInfoResVO info = info(infoSearchVO);
+            resultList.add(info);
+        }
+
+        return resultList;
+    };
 
 
 }
