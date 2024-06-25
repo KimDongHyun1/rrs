@@ -85,3 +85,40 @@ header nav ul li {
     background: url(img/bg1.jpg) center/cover;
     background-attachment: fixed;
 }
+
+.card {
+    width: 20rem;
+    height: 20rem;
+    margin: 10px;
+}
+
+.card img {
+    width:100%;
+    height:100%;
+}
+
+.clickable-image {
+    cursor: pointer;
+}
+/*
+
+!* 추가된 CSS 코드 *!
+#asset-stock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+
+#asset-stock canvas {
+    width: 100%;
+    height: 10%;
+}
+
+#asset-stock table {
+    width: 100%;
+    !*height: 500px;*!
+}
+*/

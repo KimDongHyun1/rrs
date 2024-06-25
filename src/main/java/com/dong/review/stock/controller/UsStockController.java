@@ -6,7 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("usStock")
@@ -19,8 +21,24 @@ public class UsStockController {
      */
     @PostMapping("chart")
     @ResponseBody
-    public UsStockChartResVO chart(@RequestBody UsStockChartReqVO reqVO) throws Exception {
-        return usStockService.chart(reqVO);
+    public Map<Object, Object> chart(@RequestBody UsStockChartReqVO reqVO) throws Exception {
+        UsStockChartResVO chart = usStockService.chart(reqVO);
+
+        Map<Object, Object> resultMap = new HashMap<>();
+        List<String> header = new ArrayList<>();
+        List<String> value = new ArrayList<>();
+
+//        List<UsStockChartResVO.Output2> output2 = chart.getOutput2();
+        for(UsStockChartResVO.Output2 output2 :  chart.getOutput2()) {
+            header.add(output2.getXymd());
+            value.add(output2.getClos());
+        }
+
+        resultMap.put("header", header);
+        resultMap.put("data", value);
+
+
+        return resultMap;
     }
 
     /**
@@ -39,7 +57,6 @@ public class UsStockController {
     @ResponseBody
     public List<UsStockInfoResVO> infoList(@RequestBody UsStockInfoReqVO reqVO) throws Exception {
         List<UsStockInfoResVO> resultList = usStockService.infoList(reqVO);
-
         return resultList;
     }
 

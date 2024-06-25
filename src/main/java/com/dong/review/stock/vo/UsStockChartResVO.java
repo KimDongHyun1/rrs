@@ -22,7 +22,7 @@ public class UsStockChartResVO {
     @Getter
     @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
     @JsonIgnoreProperties(ignoreUnknown = true)
-    private static class Output2 {
+    public static class Output2 {
         private String xymd;    //일자
         private String clos;    //종가
         private String rate;    //등락율
